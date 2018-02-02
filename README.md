@@ -1,13 +1,13 @@
 Test Driven ~~Development~~ Infrastructure
 ======================================
 
-Once upon a time, a guy named [Kief Morris](https://www.linkedin.com/in/kiefmorris/) realized that techiniques largely used in software development, could also be applied on infrastructure. Luckly, he was not crazy, he acctually wrote a book that describe exactly what can be done on infrastructure side this book is called [Infrastructure as Code](http://shop.oreilly.com/product/0636920039297.do).
+Once upon a time, a guy named [Kief Morris](https://www.linkedin.com/in/kiefmorris/) realized that techiniques largely used in software development, could also be applied on infrastructure. Luckly, he was not crazy, he acctually wrote a book that describe exactly what can be done on infrastructure side. His book is called [Infrastructure as Code](http://shop.oreilly.com/product/0636920039297.do).
 
-Some may think that this is something that can only be applied to public cloud infrastructure, and the main goal of this demo is to prove the oposite.
+Some may think that this is something that can only be applied to public cloud infrastructure, and the main goal of this demo is to prove exactly the oposite.
 
 Test-driven development (TDD) is a software development process that relies on the repetition of a very short development cycle: Requirements are turned into very specific test cases, then the software is improved to pass the new tests, only. This is opposed to software development that allows software to be added that is not proven to meet requirements. During this demo I'll show how to apply that on infrastructure as well.
 
-> **NOTICE:** This is an extremely advanced topic, If you are a beginner or one of those that can only work with windows, I recommend you to stop here and read more and do some PoCs, the main topics are GNU/Linux and Open Source solutions, then come back here. It will be a pleasure to share this knowledge with you as well.
+> **WARNING:** This is not an easy topic, please be sure you have enough experience to get the benefits from this demo.
 
 > **HELP:** If you see an issue, typo or any kind of mistake within this project, please don't forgive me, send me a PR instead. Appreciated.
 
@@ -57,6 +57,7 @@ Below I'll describe step-by-step what will happen when you run this demo.
    * Execution of a NGINX role will on both machines, install NGINX as a service and setup it to proxy_pass requests to the local tomcat.
 3. Execute the tests provided by ServerSpec against both servers and make sure they all pass
 4. Test the application on your browser
+5. Destroy everything.
 
 
 Setup
@@ -141,7 +142,7 @@ base-centos-7  Vagrant  AnsiblePlaybook  Serverspec  Ssh        Converged    <No
 $ kitchen verify
 ```
 
-A lot of test will run, I basically have one test scenario per ansible role, they usually takes about 50 seconds to run. No errors are expected here, so the last step should look like this.
+A lot of tests will run, I basically have one test scenario per ansible role, they usually takes about 50 seconds to run. No errors are expected here, so after the test execution, the host status should look like this.
 ```bash
 $ kitchen list
 Instance       Driver   Provisioner      Verifier    Transport  Last Action  Last Error
@@ -157,18 +158,19 @@ Something similiar to the images below should be reachable, if you have a cellph
     <img src="images/app-running.png" width=1000>
 </p>
 
-Ok now what? We know everything is working as it supposed to, so we no longer need these virtual machines wasting our precious local SSDs, let's get rid of it.
+Ok, now what? We know everything is working as it supposed to, so we no longer need these virtual machines wasting our precious local SSDs, so let's get rid of it.
 ```bash
 $ kitchen destroy
+$ kitchen list
 ```
 
 Next Steps
 ----------
-You are now able to see the whole creation of a new environment but not much detail was given during this process. Please check the README.md on each role, detailed information can be found there.
+You were able to see the creation of a new environment but not much detail was given during this process. Please check the README.md on each role, detailed information can be found there.
 
 License
 -------
-GPLv2
+[GPLv2](LICENSE)
 
 Credits
 -------
