@@ -1,0 +1,9 @@
+---
+- name: Copy tomcat supervisord service configuration
+  copy:
+    src: service/tomcat.conf
+    dest: /etc/supervisor.d/tomcat.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: Reload supervisord and restart tomcat service

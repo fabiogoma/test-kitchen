@@ -1,0 +1,5 @@
+---
+- name: Reload supervisord and restart tomcat service
+  service:
+    state: restarted
+    name: supervisord

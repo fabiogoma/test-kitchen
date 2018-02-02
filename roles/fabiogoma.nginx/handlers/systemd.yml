@@ -1,0 +1,8 @@
+---
+- name: Reload systemd and restart NGINX service
+  systemd:
+    state: restarted
+    enabled: true
+    daemon_reload: true
+    name: nginx
+  when: ((ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux') and ansible_distribution_major_version == '7')

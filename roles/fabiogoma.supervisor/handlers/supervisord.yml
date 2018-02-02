@@ -1,0 +1,6 @@
+---
+- name: Enable and start supervisor daemon
+  service:
+    name: supervisord
+    enabled: true
+    state: started

@@ -1,0 +1,6 @@
+---
+- name: Install python-pip package
+  yum: name={{ item }} state=present
+  with_items:
+   - python-setuptools
+   - python-pip

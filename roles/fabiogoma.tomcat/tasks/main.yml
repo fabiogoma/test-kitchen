@@ -1,0 +1,11 @@
+---
+- import_tasks: packages.yml
+- import_tasks: npa.yml
+- import_tasks: tomcat.yml
+- import_tasks: deploy.yml
+
+- import_tasks: supervisord.yml
+  when: ((ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux') and ansible_distribution_major_version == '6') 
+
+- import_tasks: systemd.yml
+  when: ((ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux') and ansible_distribution_major_version == '7')

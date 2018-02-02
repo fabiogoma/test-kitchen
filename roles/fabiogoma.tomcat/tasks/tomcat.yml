@@ -1,0 +1,30 @@
+---
+- name: Create tomcat default folder
+  file:
+    path: /opt/tomcat/
+    owner: tomcat
+    group: tomcat
+    state: directory
+    mode: 0750
+
+- name: Download tomcat tarball
+  get_url:
+    url: https://archive.apache.org/dist/tomcat/tomcat-8/v8.5.27/bin/apache-tomcat-8.5.27.tar.gz
+    dest: /tmp/apache-tomcat-8.5.27.tar.gz
+    mode: 0440
+
+- name: Unpack tomcat tarball file
+  unarchive:
+    src: /tmp/apache-tomcat-8.5.27.tar.gz
+    dest: /opt/tomcat/
+    owner: tomcat
+    group: tomcat
+    remote_src: true
+    extra_opts: [--strip-components=1]
+    keep_newer: true
+
+- name: Configure server.xml to host a static content project
+  lineinfile:
+    path: /opt/tomcat/conf/server.xml
+    insertafter: 'unpackWARs'
+    line: '        <Context docBase="/opt/tomcat/characters" path="/characters" />'

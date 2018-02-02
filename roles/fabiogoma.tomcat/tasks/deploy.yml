@@ -1,0 +1,35 @@
+---
+- name: Create the default folder to hold static content
+  file:
+    path: /opt/tomcat/characters
+    state: directory
+    owner: tomcat
+    group: tomcat
+    mode: 0755
+
+- name: Transfer static content to deployment folder
+  copy:
+    src: "{{ item }}"
+    dest: /opt/tomcat/characters
+    owner: tomcat
+    group: tomcat
+    mode: 0644
+  with_items:
+   - deploy/bootstrap
+   - deploy/images
+
+- name: Enforce permissions on static folders
+  file:
+    path: "{{ item }}"
+    mode: 0755
+  with_items:
+   - /opt/tomcat/characters/bootstrap
+   - /opt/tomcat/characters/images
+
+- name: Transfer index page to deployment folder
+  copy:
+    src: deploy/index.html
+    dest: /opt/tomcat/characters/
+    owner: tomcat
+    group: tomcat
+    mode: 0644

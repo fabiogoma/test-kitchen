@@ -1,0 +1,9 @@
+---
+- name: Configure mDNS
+  lineinfile:
+    path: /etc/avahi/avahi-daemon.conf
+    regexp: '^#allow-interfaces=eth0'
+    line: 'allow-interfaces=eth1'
+    state: present
+    backrefs: yes
+  notify: Restart mDNS service

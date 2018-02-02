@@ -1,0 +1,35 @@
+---
+driver:
+  name: vagrant
+  network:
+  - ["public_network", bridge: "eno1"]
+  # Replace the name of this interface, from eno1 to your main ethernet adapter
+
+provisioner:
+  name: ansible_playbook
+  roles_path: ../roles
+  playbook: playbook.yml
+  hosts: all
+  require_chef_for_busser: false
+  require_ruby_for_busser: true
+
+platforms:
+  - name: centos/6
+  - name: centos/7
+
+verifier:
+  name: serverspec
+
+suites:
+  - name: base
+    verifier:
+      patterns:
+       - roles/fabiogoma.common/tests/spec/common_spec.rb
+       - roles/fabiogoma.supervisor/tests/spec/supervisor_spec.rb
+       - roles/fabiogoma.tomcat/tests/spec/tomcat_spec.rb
+       - roles/fabiogoma.nginx/tests/spec/nginx_spec.rb
+      bundler_path: /opt/rh/ruby200/root/usr/local/bin
+      rspec_path: /opt/rh/ruby200/root/usr/local/bin
+
+transport:
+    max_ssh_sessions: 6

@@ -1,0 +1,21 @@
+---
+- name: Create NGINX repo
+  copy:
+    src: nginx.repo
+    dest: /etc/yum.repos.d/nginx.repo
+
+- name: Install NGINX
+  yum: 
+    name: nginx
+    state: present
+
+- name: Configure NGINX
+  copy:
+    src: default.conf
+    dest: /etc/nginx/conf.d/default.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+   - Restart and enable NGINX service
+   - Reload systemd and restart NGINX service

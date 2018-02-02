@@ -1,0 +1,48 @@
+---
+- name: Update pip to the latest version
+  pip:
+    name: pip
+    state: latest
+
+- name: Download meld3 and supervisor tarballs
+  get_url:
+    url: "{{item}}"
+    dest: /tmp/{{item | basename}}
+    mode: 0440
+  with_items:
+   - https://pypi.python.org/packages/45/a0/317c6422b26c12fe0161e936fc35f36552069ba8e6f7ecbd99bbffe32a5f/meld3-1.0.2.tar.gz
+   - https://pypi.python.org/packages/31/7e/788fc6566211e77c395ea272058eb71299c65cc5e55b6214d479c6c2ec9a/supervisor-3.3.3.tar.gz
+
+- name: Install meld3 and supervisor
+  pip:
+    name: "{{ item }}"
+    state: present
+  with_items:
+   - /tmp/meld3-1.0.2.tar.gz
+   - /tmp/supervisor-3.3.3.tar.gz
+
+- name: Create supervisor conf
+  block:
+   - name: Create default configuration folder
+     file:
+       path: /etc/supervisor.d/
+       state: directory
+       owner: root
+       group: root
+       mode: 0755
+   - name: Copy default configuration
+     copy:
+       src: supervisord.conf
+       dest: /etc/supervisord.conf
+       owner: root
+       group: root
+       mode: 0644
+
+   - name: Create supervisor service
+     copy: 
+       src: supervisord
+       dest: /etc/init.d/supervisord
+       owner: root
+       group: root
+       mode: 0755
+     notify: Enable and start supervisor daemon
