@@ -1,11 +1,11 @@
 Test Driven ~~Development~~ Infrastructure
 ======================================
 
-Once upon a time, a guy named [Kief Morris](https://www.linkedin.com/in/kiefmorris/) realized that techiniques largely used in software development, could also be applied on infrastructure. Luckly, he was not crazy, he acctually wrote a book that describe exactly what can be done on infrastructure side. His book is called [Infrastructure as Code](http://shop.oreilly.com/product/0636920039297.do).
+Once upon a time, a guy named [Kief Morris](https://www.linkedin.com/in/kiefmorris/) realized that techiniques largely used in software development, could also be applied on infrastructure. Luckly, he was not crazy, he acctually wrote a book that describes exactly what can be done on infrastructure side. His book is called [Infrastructure as Code](http://shop.oreilly.com/product/0636920039297.do).
 
-Some may think that this is something that can only be applied to public cloud infrastructure, and the main goal of this demo is to prove exactly the oposite.
+Some may think that this is something that can only be applied to public cloud infrastructure, and the main goal of this demo is to prove exactly the opposite.
 
-Test-driven development (TDD) is a software development process that relies on the repetition of a very short development cycle: Requirements are turned into very specific test cases, then the software is improved to pass the new tests, only. This is opposed to software development that allows software to be added that is not proven to meet requirements. During this demo I'll show how to apply that on infrastructure as well.
+Test-driven development (TDD) is a software development process that relies on the repetition of a very short development cycle: Specific test cases are built base on requirements, then the software is improved until all test cases are running with no issue. In another hand, traditional software development allows developers to change/add code which might not meet all the requirements. Throughout this demo, I'll show how to leverage TDD benefits on infrastructure world.
 
 > **WARNING:** This is not an easy topic, please be sure you have enough experience to get the benefits from this demo.
 
