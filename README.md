@@ -104,7 +104,7 @@ base-centos-6  Vagrant  AnsiblePlaybook  Serverspec  Ssh        <Not Created>  <
 base-centos-7  Vagrant  AnsiblePlaybook  Serverspec  Ssh        <Not Created>  <None>
 ```
 
-> **NOTICE:** Do not continue, you need to do a small change on .kitchen.yml. Check on line 5 the network bridge. Here I'm using my ethernet card attached to the network with internet access, replace **eno1** by whathever name your ethernet has.
+> **NOTICE:** Do not continue, you need to do a small change on .kitchen.yml. Check on line 5 the network bridge. Here I'm using my ethernet card attached to the network with internet access, replace **eno1** by whathever name your ethernet might have.
 
 Everything seems good, let's create the virtual machines.
 ```bash
