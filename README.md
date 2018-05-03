@@ -83,7 +83,7 @@ $ chef exec gem install serverspec
 
 > **NOTICE:** Till here, no errors are expected, if that's not the case, please don't go further, fix it first.
 
-Runing the demo
+Running the demo
 ---------------
 
 Create a local working folder and then clone this repo.
